@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* 
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */
+
+body {
+  margin: 0;
+  padding: 0;
+  /* background-color: #1d2634; */
+  background-color: #EFEFEF;
+  color: #9e9ea4;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.left-container {
+  border-radius: 20px;
+  background: linear-gradient(180deg, #A9262B 1.38%, #FFF 1.45%);
+  
+}
+
+.mid-containers {
+  border-radius: 20px;
+  background: linear-gradient(180deg, #A9262B 7.33%, #FFF 8%);
+
+}
+
+.red-line {
+  left: 70px;
+  width: 190px;
+  height: 5px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #A9262B;
+}
+
+.linha-superior {
+  top: 230px;
+}
+
+.linha-inferior {
+  top: 350px;
+}
+
+.fisico {
+  position: fixed;
+  mix-blend-mode: multiply;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 40%;  
+}

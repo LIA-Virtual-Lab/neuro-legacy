@@ -1,28 +1,40 @@
 import Image from 'next/image'
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import gifNeuronio from '../image/neuronio.gif';
 import fire from '../image/fogo.png'
 import agua from '../image/agua.png'
 import agulha from '../image/agulha.png'
 import neuro from '../image/neuro.png'
 import fisico from '../image/fisico.png'
+import Draggable from 'react-draggable';
+
 
 function Dashboard() {
 
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+
+    const handleStop = () => {
+        // Atualiza o estado para resetar a posição para (0, 0)
+        setPosition({ x: 0, y: 0 });
+    };
   return (
       <div className='flex flex-row font-mono'>
         {/* left */}
         <div className='flex flex-col bg-white m-10 left-container p-8 space-y-10 w-64 black text-black'>
-        
             <span></span>
             <Image src={gifNeuronio} alt='neuronio' width={200} className='rounded-xl'/>
             <p className='red-line linha-superior'></p>
             <p className='black'>Itens:</p>
 
             <div className='flex flex-row space-x-4'>
-                <Image src={fire} alt='fogo' width={50}/>
-                <Image src={agua} alt='fogo' width={50}/>
-                <Image src={agulha} alt='fogo' width={50}/>
+                <Draggable 
+                    position={position}
+                    onStop={handleStop}
+                    bounds="parent" // Restringe o arrasto ao componente pai
+                >
+                <Image src={fire} alt='fogo' width={50} id='movableDiv'/></Draggable>
+                <Draggable><Image src={agua} alt='fogo' width={50}/></Draggable>
+                <Draggable><Image src={agulha} alt='fogo' width={50}/></Draggable>
             </div>
             <p className='red-line linha-inferior'></p>
 

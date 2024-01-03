@@ -30,26 +30,25 @@ function Dashboard() {
 
         
 
-        <div className='flex flex-wrap'>
+        <div className='container'>
             {/* mid up */}
-            <div className='bg-withe mt-10 mr-5 ml-[30px] mid-containers p-6 h-32 text-right text-top'>
+            <div className='bg-withe mt-10 mr-5 mid-containers p-6 h-32 text-right text-top div1'>
                 <p>Calor</p>
                 <Image src={neuro} alt='neuronio' width={100} className='rounded-xl'/>
             </div>
-            <div className='bg-withe mt-10 mr-5 mid-containers p-6 h-32 text-right text-top'>
+            <div className='bg-withe mt-10 mr-5 mid-containers p-6 h-32 text-right text-top div2'>
                 <p>Frio</p>
 
                 <Image src={neuro} alt='neuronio' width={100} className='rounded-xl'/>
             </div>
-            <div className='bg-withe mt-10 mr-[10px] mid-containers p-6 h-32 text-right text-top'>
+            <div className='bg-withe mt-10 mid-containers p-6 h-32 text-right text-top div3'>
                 <p>Dor</p>
 
                 <Image src={neuro} alt='neuronio' width={100} className='rounded-xl'/>
             </div>
 
-
             {/* mid */}
-            <div className='mix-blend-multiply ml-[30%]'>
+            <div className='mix-blend-multiply div4'>
                 <Image src={fisico} alt='fisico' width={200} />
 
             </div>

@@ -29,8 +29,8 @@ body {
 body {
   margin: 0;
   padding: 0;
-  /* background-color: #1d2634; */
-  background-color: #EFEFEF;
+  background-color: #1d2634;
+  /* background-color: #EFEFEF; */
   color: #9e9ea4;
   font-family: 'Montserrat', sans-serif;
 }
@@ -64,12 +64,36 @@ body {
   top: 350px;
 }
 
-.fisico {
-  position: fixed;
-  mix-blend-mode: multiply;
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 40%;  
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 10px; /* Espaçamento entre as divs */
+
+  /* Define a estrutura do grid */
+  grid-template-areas:
+    "1 1 1"
+    "0 1 0";
+}
+
+.div1 {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+}
+
+.div2 {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+}
+
+.div3 {
+  grid-column: 3 / span 1;
+  grid-row: 1 / span 1;
+}
+
+.div4 {
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
+  justify-self: center; /* Centraliza a div na horizontal */
 }

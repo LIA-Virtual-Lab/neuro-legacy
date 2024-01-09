@@ -1,22 +1,26 @@
-import Image from "next/image";
-import React, { useState, useRef, useEffect } from "react";
-import Button from "./Button";
 import axios from "axios";
+import Image from "next/image";
+import { useContext, useEffect, useState } from "react";
+import { QuestContext } from "@/contexts/QuestContext";
+import Button from "./Button";
 import Itens from "./Itens";
-
 // imgs
-import gifNeuronio from "../image/neuronio.gif";
-
-import neuro from "../image/neuro.png";
 import fisico from "../image/fisico.png";
+import neuro from "../image/neuro.png";
+import gifNeuronio from "../image/neuronio.gif";
+import {gsap, Draggable} from "gsap";
 
 function Dashboard() {
-  const [index, setIndex] = useState(1);
+  // const { questIndex } = useContext(QuestContext);
+  const { indexQuest, count, texte } = useContext(QuestContext);
+
+  const [index, setIndex] = useState(indexQuest);
 
   const [data, setData] = useState();
   const [quest, setQuest] = useState();
-  const [answer, setAnswaer] = useState();
+  const [answer, setAnswer] = useState();
 
+  // chamada unica ao banco
   useEffect(() => {
     axios
       .get(
@@ -25,19 +29,53 @@ function Dashboard() {
       .then((response) => {
         console.log(response);
         setData(response.data);
-
-        setQuest(response.data.data[index].attributes.questao);
-        setAnswaer(response.data.data[index].attributes.respostas.data);
+        setQuest(response.data.data[0].attributes.questao);
+        setAnswer(response.data.data[0].attributes.respostas.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
+  //atualizar os states
+  useEffect(() => {
+    console.log("atualizei", indexQuest);
+    setIndex(indexQuest);
+    nextQuest();
+  }, [indexQuest, index]);
 
+  function nextQuest() {
+    if (!data) return;
+    if (data.data.length - 1 < indexQuest) return;
+    setQuest(data.data[index].attributes.questao);
+    setAnswer(data.data[index].attributes.respostas.data);
+  }
+
+  // useEffect(() => {
+  //   console.log("atualizei", indexQuest);
+  //   setIndex(indexQuest);
+
+  //   axios
+  //     .get(
+  //       "https://neurofisiologia-back-end-2a85b59bd567.herokuapp.com/api/perguntas?populate=*"
+  //     )
+  //     .then((response) => {
+  //       console.log(response);
+  //       setData(response.data);
+
+  //       setQuest(response.data.data[index].attributes.questao);
+  //       setAnswer(response.data.data[index].attributes.respostas.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, [indexQuest, index]);
+  
+
+  
   return (
     <div className="flex flex-row font-mono">
-
+      {/* <h1>{texte}</h1> */}
       {/* left */}
       <div className="flex flex-col bg-white m-10 left-container p-8 space-y-10 w-64 black text-black">
         <span></span>
@@ -50,11 +88,8 @@ function Dashboard() {
         <p className="red-line linha-superior"></p>
         <p className="black">Itens:</p>
 
-        <div className="flex flex-row space-x-4">
-          
-            <Itens />
-          
-        </div>
+        <div className="flex flex-row space-x-4"><Itens /></div>
+
         <p className="red-line linha-inferior"></p>
       </div>
 
@@ -104,12 +139,11 @@ function Dashboard() {
         <div className="flex flex-col space-y-4">
           {answer &&
             answer.map((resposta, i) => {
-            //   console.log(resposta);
+              // console.log(resposta);
               return <Button key={i} obj={resposta} />;
             })}
         </div>
       </div>
-
     </div>
   );
 }

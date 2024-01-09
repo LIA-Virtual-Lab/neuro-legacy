@@ -12,12 +12,17 @@
 body {
   margin: 0;
   padding: 0;
-  /* background-color: #1d2634; */
+  background-color: #1d2634;
   background-color: #EFEFEF;
-  color: #9e9ea4;
+  /* color: #9e9ea4; */
   font-family: 'Montserrat', sans-serif;
 }
 
+/* .dark-theme,
+.dark-theme a {
+  background-color: #1d2634;
+  color: #EFEFEF;
+} */
 .left-container {
   border-radius: 20px;
   background: linear-gradient(180deg, #A9262B 1.38%, #FFF 1.45%);
@@ -80,3 +85,8 @@ body {
   grid-row: 2 / span 1;
   justify-self: center; /* Centraliza a div na horizontal */
 }
+
+/* 
+@media only screen and (max-width: 1370px) {
+  
+} */

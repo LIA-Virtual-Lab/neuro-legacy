@@ -16,6 +16,7 @@ body {
   background-color: #EFEFEF;
   /* color: #9e9ea4; */
   font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
 }
 
 /* .dark-theme,
@@ -23,6 +24,7 @@ body {
   background-color: #1d2634;
   color: #EFEFEF;
 } */
+
 .left-container {
   border-radius: 20px;
   background: linear-gradient(180deg, #A9262B 1.38%, #FFF 1.45%);
@@ -53,17 +55,35 @@ body {
 }
 
 
+
 .container {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 10px;
+}
+
+.painelCima {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.painelBaixo {
+  margin-top: 10px;
+  justify-self: center;
+}
+
+
+/* .containerr {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
-  gap: 10px; /* Espaçamento entre as divs */
+  gap: 10px; /.* Espaçamento entre as divs *./
 
-  /* Define a estrutura do grid */
+  /.* Define a estrutura do grid *./
   grid-template-areas:
     "1 1 1"
     "0 1 0";
-}
+} */
 
 .div1 {
   grid-column: 1 / span 1;

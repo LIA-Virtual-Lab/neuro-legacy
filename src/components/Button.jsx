@@ -26,10 +26,7 @@ export default function Button({ obj }) {
 
   const { indexQuest, count, texte, setTexte } = useContext(QuestContext);
 
-  // useEffect(() => {
-  //   console.log(indexQuest);
-  //   debugger;
-  // }, []);
+
 
   return (
     <>

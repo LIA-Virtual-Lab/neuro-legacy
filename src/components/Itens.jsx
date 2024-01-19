@@ -8,11 +8,11 @@ import Draggable from "gsap/dist/Draggable";//isso resolveu todos os meus proble
 export default function Itens() {
     const handleClick = (nome) => {
     console.log("foi clicado: ", nome);
-    // Adicione lógica adicional para lidar com o clique, se necessário.
-    gsap.to(nome, { scale: 2 });
+    
+    gsap.to(nome, { scale: 4 });
   };
 
-  const tipo = "neurofisiologia";
+  const tipo = "itens_neurologia";
   const [itens, setItens] = useState([]);
 
   useEffect(() => {
@@ -24,9 +24,10 @@ export default function Itens() {
         console.log("item response: ", response.data.data);
 
         const filteredItens = response.data.data.filter(
-          (element) => element.attributes.propriedades.type === tipo
-        );
-
+          (element) => element.attributes.tipo.data.attributes.nome === tipo,
+          );
+          
+        // console.log("a saida do filtro é: ", filteredItens)
         setItens(filteredItens);
       })
       .catch((error) => {

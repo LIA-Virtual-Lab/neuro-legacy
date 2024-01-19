@@ -7,67 +7,64 @@ const AnimationContext = createContext();
 export const AnimationProvider = ({ children }) => {
   const [animationActive, setAnimationActive] = useState(false);
 
+  const [divVisivel, setDivVisivel] = useState(true);
 
-  const controls = useAnimation();
-
+  const controlsCima = useAnimation();
   const controlsFisico = useAnimation();
   const controlsDireita = useAnimation();
+  const controlsTecido = useAnimation();
 
-  const startAnimation = () => {
-    console.log("aqui");
+
+
+  const startAnimation = async () => {
     setAnimationActive(true);
 
-    controls.start({
+    controlsCima.start({
       opacity: 0,
       scale: 2,
       y: -600,
       transition: { duration: 1 },
     });
 
-
     controlsFisico.start({
       opacity: 0,
       scale: 2,
       transition: { duration: 0.5 },
-    })
-    controlsDireita.start({
+    });
+
+    await controlsDireita.start({
       opacity: 0,
       scale: 2,
       x: 800,
       transition: { duration: 0.5 },
-    })
-  };
-
-
-
-  function swithAnimate() {
-    controls.start({
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { duration: 1 },
     });
 
-    controlsFisico.start({
-      opacity: 1,
-      scale: 1,
+    setDivVisivel(false);
+  };
+
+  
+  async function swithAnimate() {
+    
+    await controlsTecido.start({
+      opacity: 0,
+      scale: 0.1,
       transition: { duration: 1 },
-    })
-    controlsDireita.start({
-      opacity: 1,
-      scale: 1,
-      x: 0,
-      transition: { duration: 1 },
-    })
+    });
+    
+    !divVisivel ? setDivVisivel(true) : null
   }
 
+  
   const value = {
     animationActive,
     startAnimation,
     swithAnimate,
-    controls,
+    controlsCima,
     controlsFisico,
     controlsDireita,
+    controlsTecido,
+    divVisivel,
+
   };
 
   return (

@@ -33,15 +33,9 @@ export default function Fisico() {
   //   });
   // };
 
+  
   return (
-    <motion.div
-      animate={controlsFisico}
-      style={
-        {
-          // backgroundColor: "blue",
-        }
-      }
-    >
+    <motion.div animate={controlsFisico}>
       <Image
         id="fisicoo"
         src={fisico}

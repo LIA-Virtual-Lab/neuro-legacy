@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import Itens from "./Itens";
 import Fisico from "./Fisico";
 import Tecido from "./Tecido";
+import Scroll from "./Scroll";
 import PainelCima from "./PainelCima";
 import PainelDireito from "./PainelDireito";
 import { useAnimationContext } from "../contexts/AnimationContext";
@@ -13,27 +14,23 @@ import gifNeuronio from "../image/neuronio.gif";
 import seta_voltar from "../image/seta_voltar.png";
 
 function Dashboard() {
-  const { swithAnimate } = useAnimationContext();
-
-  const [divVisivel, setDivVisivel] = useState(true);
-  const desabilitarDiv = () => {
-    setTimeout(() => {
-      setDivVisivel(!divVisivel);
-    }, "500");
-  };
+  const { swithAnimate, divVisivel } = useAnimationContext();
 
   return (
     <motion.div
       className="flex flex-row font-mono"
-      initial={{ opacity: 0, scale: 1.5 }}
+      initial={{ opacity: 0, scale: 1.2 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
     >
       <Image
         src={seta_voltar}
+        id="seta_voltar"
         alt="seta"
         className="h-8 w-8 absolute ml-[5px] hover:cursor-pointer"
-        onPointerDown={swithAnimate}
+        onPointerDown={function () {
+          swithAnimate();
+        }}
       />
 
       {/* left */}
@@ -57,39 +54,52 @@ function Dashboard() {
 
       {/* mid */}
       {divVisivel ? (
-
-
-
-
         <div className="container">
-          {/* mid up */}
-          <PainelCima />
+          {/* painel cima */}
+          <motion.div
+            initial={{ y: -600, opacity: 0, scale: 2 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <PainelCima />
+          </motion.div>
 
-          {/* mid down*/}
+          {/* fisico*/}
           <motion.div
             className="mix-blend-multiply painelBaixo "
-            initial={{ opacity: 0, scale: 2 }}
+            initial={{ opacity: 0, scale: 3 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             id="fisico"
-            // onClick={desabilitarDiv}
           >
             <Fisico />
           </motion.div>
         </div>
       ) : null}
 
-      {/* right */}
+      {/* painel direito */}
       {divVisivel ? (
-        <div>
+        <motion.div
+          initial={{ x: 800, opacity: 0, scale: 2 }}
+          animate={{ x: 0, opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <PainelDireito />
-        </div>
+        </motion.div>
       ) : null}
 
+
+      {/* pele */}
       {!divVisivel ? (
-        <div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          className="flex flex-row space-x-[340px]"
+        >
           <Tecido />
-        </div>
+          <Scroll/>
+        </motion.div>
       ) : null}
     </motion.div>
   );

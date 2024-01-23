@@ -8,6 +8,7 @@ import Scroll from "./Scroll";
 import PainelCima from "./PainelCima";
 import PainelDireito from "./PainelDireito";
 import { useAnimationContext } from "../contexts/AnimationContext";
+import Sinapse from "./Sinapse";
 
 // imgs
 import gifNeuronio from "../image/neuronio.gif";
@@ -95,10 +96,10 @@ function Dashboard() {
           initial={{ opacity: 0, scale: 0.1 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="flex flex-row space-x-[340px]"
+          className="flex flex-row "
         >
           <Tecido />
-          <Scroll/>
+          <Scroll />
         </motion.div>
       ) : null}
     </motion.div>

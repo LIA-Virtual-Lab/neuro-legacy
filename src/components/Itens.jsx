@@ -21,7 +21,7 @@ export default function Itens() {
         "https://neurofisiologia-back-end-2a85b59bd567.herokuapp.com/api/objetos?populate=*"
       )
       .then((response) => {
-        console.log("item response: ", response.data.data);
+        // console.log("item response: ", response.data.data);
 
         const filteredItens = response.data.data.filter(
           (element) => element.attributes.tipo.data.attributes.nome === tipo,

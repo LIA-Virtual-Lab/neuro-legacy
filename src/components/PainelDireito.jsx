@@ -22,7 +22,7 @@ export default function painelDireito() {
         "https://neurofisiologia-back-end-2a85b59bd567.herokuapp.com/api/perguntas?populate=*"
       )
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setData(response.data);
         setQuest(response.data.data[0].attributes.questao);
         setAnswer(response.data.data[0].attributes.respostas.data);
@@ -34,7 +34,7 @@ export default function painelDireito() {
 
   //atualizar os states
   useEffect(() => {
-    console.log("atualizei", indexQuest);
+    // console.log("atualizei", indexQuest);
     setIndex(indexQuest);
     nextQuest();
   }, [indexQuest, index]);

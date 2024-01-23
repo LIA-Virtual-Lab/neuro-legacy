@@ -7,15 +7,9 @@ import { useAnimationContext } from "../contexts/AnimationContext";
 export default function Tecido() {
   const { controlsTecido } = useAnimationContext();
 
-  const tipo = "camadas";
-  const [itens, setItens] = useState([]);
-  const alvo = "camadas2";
-  const [alvos, setAlvos] = useState([]);
-  const [dimensions, setDimensions] = useState({
-    width: 500,
-    height: 50,
-  });
-  const [isAlvos, setIsAlvos] = useState(true);
+  const camadas = "camadas";
+  const [camada1, setCamada1] = useState([]);
+  const [imagemVisibility, setImagemVisibility] = useState({});
 
   useEffect(() => {
     axios
@@ -24,57 +18,49 @@ export default function Tecido() {
       )
       .then((response) => {
         const filteredItens = response.data.data.filter(
-          (element) => element.attributes.tipo.data.attributes.nome === tipo
-        );
-        const filteredItens2 = response.data.data.filter(
-          (element) => element.attributes.tipo.data.attributes.nome === alvo
+          (element) => element.attributes.tipo.data.attributes.nome === camadas
         );
 
-        setItens(filteredItens);
-        setAlvos(filteredItens2);
+        console.log("a saida do filtro é: ", filteredItens);
+        setCamada1(filteredItens);
 
-        // Atualiza as dimensões com base na primeira imagem
-        if (filteredItens.length > 0) {
-          const firstItem = filteredItens[0];
-          setDimensions({
-            width: firstItem.attributes.cover.data[0].attributes.width,
-            height: firstItem.attributes.cover.data[0].attributes.height,
-          });
-        }
+        // Inicializando o estado de visibilidade para todas as imagens como true
+        const initialVisibilityState = {};
+        filteredItens.forEach((item) => {
+          initialVisibilityState[item.id] = true;
+        });
+        setImagemVisibility(initialVisibilityState);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
+  const handleImageClick = (id) => {
+    // Tornar invisível apenas a imagem com o ID correspondente
+    setImagemVisibility((prevVisibility) => ({
+      ...prevVisibility,
+      [id]: false,
+    }));
+  };
+
   return (
     <>
       <motion.div animate={controlsTecido}>
-        {isAlvos
-          ? alvos.map((element) => (
-              <Image
-                key={element.id}
-                nome={element.attributes.nome}
-                src={element.attributes.cover.data[0].attributes.url}
-                onPointerDown={() => setIsAlvos(!isAlvos)}
-                className="mix-blend-multiply ml-[150px]"
-                width={dimensions.width}
-                height={dimensions.height}
-                alt="itens"
-              />
-            ))
-          : itens.map((element) => (
-              <Image
-                key={element.id}
-                nome={element.attributes.nome}
-                src={element.attributes.cover.data[0].attributes.url}
-                onPointerDown={() => setIsAlvos(!isAlvos)}
-                className="mix-blend-multiply ml-[150px]"
-                width={dimensions.width}
-                height={dimensions.height}
-                alt="itens"
-              />
-            ))}
+        {camada1.map((element) => (
+          <Image
+            key={element.id}
+            id="camadas"
+            nome={element.attributes.nome}
+            src={element.attributes.cover.data[0].attributes.url}
+            className={"mix-blend-multiply ml-[150px] "}
+            width={500}
+            height={50}
+            alt="itens"
+            onClick={() => handleImageClick(element.id)}
+            style={{ visibility: imagemVisibility[element.id] ? 'visible' : 'hidden' }}
+          />
+        ))}
       </motion.div>
     </>
   );

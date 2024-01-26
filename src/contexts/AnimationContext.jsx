@@ -13,19 +13,20 @@ export const AnimationProvider = ({ children }) => {
   const controlsFisico = useAnimation();
   const controlsDireita = useAnimation();
   const controlsTecido = useAnimation();
+  
 
 
 
   const startAnimation = async () => {
     setAnimationActive(true);
-
+    
     controlsCima.start({
       opacity: 0,
       scale: 2,
       y: -600,
       transition: { duration: 1 },
     });
-
+    
     controlsFisico.start({
       opacity: 0,
       scale: 2,
@@ -38,13 +39,12 @@ export const AnimationProvider = ({ children }) => {
       x: 800,
       transition: { duration: 0.5 },
     });
-
+    
     setDivVisivel(false);
   };
-
+  
   
   async function swithAnimate() {
-    
     await controlsTecido.start({
       opacity: 0,
       scale: 0.1,
@@ -53,7 +53,8 @@ export const AnimationProvider = ({ children }) => {
     
     !divVisivel ? setDivVisivel(true) : null
   }
-
+  
+  
   
   const value = {
     animationActive,
@@ -64,6 +65,7 @@ export const AnimationProvider = ({ children }) => {
     controlsDireita,
     controlsTecido,
     divVisivel,
+    
 
   };
 

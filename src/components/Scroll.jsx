@@ -12,10 +12,13 @@ export default function Scroll() {
   const { controlsTecido } = useAnimationContext();
   const scrollBar = "scroll_bar";
   const scrollBtn = "scroll_btn";
+  const layersBtn = "layers_btn";
   const [barscroll, setbarscroll] = useState([]);
   const [btnscroll, setScroll] = useState([]);
+  const [btnlayers, setLayers] = useState([]);
 
-  const { playScroll, stopScroll } = useScrollContext();
+  const { playScroll, stopScroll, startLayers, stopLayers } =
+    useScrollContext();
 
   useEffect(() => {
     axios
@@ -31,9 +34,13 @@ export default function Scroll() {
           (element) =>
             element.attributes.tipo.data.attributes.nome === scrollBtn
         );
+        const layersBtnFilter = response.data.data.filter(
+          (element) => element.attributes.nome === layersBtn
+        );
 
         setbarscroll(scrollBarFilter);
         setScroll(scrollBtnFilter);
+        setLayers(layersBtnFilter);
       })
       .catch((error) => {
         console.log(error);
@@ -50,20 +57,24 @@ export default function Scroll() {
       onPress: () => {
         gsap.set(element, { zIndex: 1 });
       },
-      
+
       onDrag: () => {
         playScroll();
+        startLayers();
       },
       onRelease: () => {
         stopScroll();
-
+        stopLayers();
       },
     });
   };
 
   return (
     <>
-      <motion.div animate={controlsTecido} className="mt-[100px] fixed top-0 right-5">
+      <motion.div
+        animate={controlsTecido}
+        className="mt-[100px] fixed top-0 right-3"
+      >
         {barscroll.map((element) => (
           <Image
             key={element.id}
@@ -90,6 +101,20 @@ export default function Scroll() {
             height={60}
             alt="itens"
             ref={(el) => el && makeDraggable(el)}
+          />
+        ))}
+      </motion.div>
+      <motion.div className="mt-[390px] fixed top-0 right-2">
+        {btnlayers.map((element) => (
+          <Image
+            key={element.id}
+            nome={element.attributes.nome}
+            src={element.attributes.cover.data[0].attributes.url}
+            className="mt-3"
+            width={40}
+            height={60}
+            alt="itens"
+            // onPointerDown={} primeira aparece e ai faz anm await
           />
         ))}
       </motion.div>

@@ -101,7 +101,7 @@ export default function Tecido() {
             />
           </motion.div>
         ))}
-        {layer4.map((element) => (
+        {/* {layer4.map((element) => (
           <motion.div
           animate={controlsLayer4}
             key={element.id}
@@ -116,7 +116,7 @@ export default function Tecido() {
               alt={`camada-${element.id}`}
             />
           </motion.div>
-        ))}
+        ))} */}
       </motion.div>
     </>
   );

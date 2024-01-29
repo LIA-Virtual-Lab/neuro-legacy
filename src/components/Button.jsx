@@ -1,50 +1,35 @@
 import { QuestContext } from "@/contexts/QuestContext";
-import gsap from "gsap";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 
 export default function Button({ obj }) {
-  const onEnter = (e) => {
-    gsap.to(e.target, { scale: 1.1 });
+  const { count, setCounter } = useContext(QuestContext);
+  const [borderColor, setBorderColor] = useState("border");
+
+
+  const stylesOnClick = (stringCounter) => {
+    setCounter(`${stringCounter}`)
+
+    console.log(obj.attributes.correta);
+
+    if (obj.attributes.correta) {
+      console.log("acertou");
+      setBorderColor("border-green-500 border-2");
+    } else {
+      console.log("errou");
+      setBorderColor("border-red-500 border-2");
+    }
+    setTimeout(() => {
+      setBorderColor("border"); // Reset border color after a delay (1.5 seconds in your case)
+      count();
+    }, 1500);
   };
-
-  const onLeave = (e) => {
-    gsap.to(e.target, { scale: 1 });
-  };
-
-  const handleClick = (e) => {
-    //animation
-    gsap.to(e.target, {
-      duration: 2,
-      ease: "elastic.out(1,0.1)",
-      y: -5,
-      yoyo: true,
-      onComplete: () => {
-        gsap.set(e.target, { y: 0 }); 
-      },
-    });
-  };
-
-  const { indexQuest, count, texte, setTexte } = useContext(QuestContext);
-
-
 
   return (
     <>
       <button
         id={obj.attributes.opcao}
-        className="rounded-lg bg-red-600 p-2"
-        onClick={handleClick}
-        onPointerDown={() => {
-          // setTexte('lalala')
-          console.log(obj.attributes.correta);
-          if (obj.attributes.correta) {
-            // console.log("acertou")
-            //score
-          }
-          setTimeout(() => count(), 500);
-        }}
-        onMouseEnter={onEnter}
-        onMouseLeave={onLeave}
+        className={`p-2 rounded ${borderColor} border-solid hover:border-black hover:scale-110 duration-300 mt-5 shadow-xl`}
+        onPointerDown={()=>{stylesOnClick(obj.attributes.contra_resposta)}}
       >
         {obj.attributes.opcao}
       </button>

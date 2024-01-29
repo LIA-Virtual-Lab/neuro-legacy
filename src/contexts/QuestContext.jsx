@@ -4,7 +4,7 @@ export const QuestContext = createContext();
 
 export function QuestProvider({ children }) {
   const [indexQuest, setIndexQuest] = useState(0);
-  const [texte, setTexte] = useState("paapapa");
+  const [counter, setCounter] = useState("");
 
   const count = () => {
     setIndexQuest((previous) => previous + 1);
@@ -13,7 +13,7 @@ export function QuestProvider({ children }) {
 
 
   return (
-    <QuestContext.Provider value={{ indexQuest, count, texte, setTexte }}>
+    <QuestContext.Provider value={{ indexQuest, count, counter, setCounter }}>
       {children}
     </QuestContext.Provider>
   );

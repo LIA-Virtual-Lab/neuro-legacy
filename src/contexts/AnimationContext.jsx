@@ -9,43 +9,37 @@ export const AnimationProvider = ({ children }) => {
 
   const [divVisivel, setDivVisivel] = useState(true);
 
-  const controlsCima = useAnimation();
-  const controlsFisico = useAnimation();
-  const controlsDireita = useAnimation();
-  const controlsTecido = useAnimation();
-  
 
+  const controlsLeft = useAnimation();
+  const controlsRight = useAnimation();
+  const controlsTissue = useAnimation();
+  
 
 
   const startAnimation = async () => {
     setAnimationActive(true);
-    
-    controlsCima.start({
+  
+    controlsLeft.start({
       opacity: 0,
       scale: 2,
-      y: -600,
-      transition: { duration: 1 },
-    });
-    
-    controlsFisico.start({
-      opacity: 0,
-      scale: 2,
+      x: -600,
       transition: { duration: 0.5 },
     });
 
-    await controlsDireita.start({
+    await controlsRight.start({
       opacity: 0,
       scale: 2,
       x: 800,
       transition: { duration: 0.5 },
     });
+
     
     setDivVisivel(false);
   };
   
   
   async function swithAnimate() {
-    await controlsTecido.start({
+    await controlsTissue.start({
       opacity: 0,
       scale: 0.1,
       transition: { duration: 1 },
@@ -58,12 +52,11 @@ export const AnimationProvider = ({ children }) => {
   
   const value = {
     animationActive,
+    controlsLeft,
+    controlsRight,
+    controlsTissue,
     startAnimation,
     swithAnimate,
-    controlsCima,
-    controlsFisico,
-    controlsDireita,
-    controlsTecido,
     divVisivel,
     
 

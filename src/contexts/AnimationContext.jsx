@@ -14,8 +14,6 @@ export const AnimationProvider = ({ children }) => {
   const controlsRight = useAnimation();
   const controlsTissue = useAnimation();
   
-
-
   const startAnimation = async () => {
     setAnimationActive(true);
   
@@ -34,7 +32,7 @@ export const AnimationProvider = ({ children }) => {
     });
 
     
-    setDivVisivel(false);
+    // setDivVisivel(false);
   };
   
   
@@ -56,10 +54,11 @@ export const AnimationProvider = ({ children }) => {
     controlsRight,
     controlsTissue,
     startAnimation,
+
+
+
     swithAnimate,
     divVisivel,
-    
-
   };
 
   return (

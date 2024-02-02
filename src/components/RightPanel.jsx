@@ -13,10 +13,10 @@ export default function RightPanel() {
   return (
     <motion.div
       animate={controlsRight}
-      className="space-y-5 m-10 ml-20 black text-black "
+      className="space-y-5 m-10 ml-0 black text-black "
       id="painelDireito"
     >
-      <div className="h-[500px] rounded-[40px] border border-solid border-gray-400">
+      <div className="h-[500px] w-[500px] rounded-[40px] border border-solid border-gray-400">
        <Tissue/>
       </div>
     </motion.div>

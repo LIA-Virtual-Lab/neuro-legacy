@@ -8,8 +8,7 @@ import Button from "./Button";
 export default function LeftPanel() {
   const { controlsLeft } = useAnimationContext();
 
-  // const { questIndex } = useContext(QuestContext);
-  const { indexQuest, count, counter } = useContext(QuestContext);
+  const { indexQuest, counter } = useContext(QuestContext);
   const [index, setIndex] = useState(indexQuest);
   const [data, setData] = useState();
   const [quest, setQuest] = useState();
@@ -32,7 +31,7 @@ export default function LeftPanel() {
         console.log(error);
       });
   }, []);
-
+ 
   //atualizar os states
   useEffect(() => {
     // console.log("atualizei", indexQuest);
@@ -60,7 +59,6 @@ export default function LeftPanel() {
       <div className="w-[300px] flex flex-col font-sans">
         {answer &&
           answer.map((resposta, i) => {
-            // console.log(resposta);
             return <Button key={i} obj={resposta} />;
           })}
       </div>

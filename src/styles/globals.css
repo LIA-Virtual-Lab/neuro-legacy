@@ -24,7 +24,6 @@ body {
 }
 
 
-
 .red-line {
   left: 70px;
   width: 190px;
@@ -41,7 +40,6 @@ body {
 .linha-inferior {
   top: 350px;
 }
-
 
 .container {
   display: grid;

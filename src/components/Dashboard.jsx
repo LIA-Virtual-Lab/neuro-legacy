@@ -3,7 +3,6 @@ import { useAnimationContext } from "../contexts/AnimationContext";
 import LeftPanel from "./LeftPanel";
 import RightPanel from "./RightPanel";
 
-
 function Dashboard() {
   const { swithAnimate, divVisivel } = useAnimationContext();
 
@@ -14,7 +13,6 @@ function Dashboard() {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
     >
-
       {/* left */}
       {divVisivel ? (
         <motion.div
@@ -36,9 +34,6 @@ function Dashboard() {
           <RightPanel />
         </motion.div>
       ) : null}
-    
-
-      
     </motion.div>
   );
 }

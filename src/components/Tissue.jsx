@@ -12,7 +12,7 @@ export default function Tissue() {
 
   const [hoveredImage, setHoveredImage] = useState(null);
 
-  const camadas = ["camada1", "camada2", "camada3", "camada4",];
+  const camadas = ["camada1", "camada2", "camada3", "camada4", "camada5", "camada6"];
   const [layers, setLayers] = useState([]);
 
   useEffect(() => {

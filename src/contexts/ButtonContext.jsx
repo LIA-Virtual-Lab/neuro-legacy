@@ -7,25 +7,28 @@ const ButtonContext = createContext();
 export const useButtonContext = () => useContext(ButtonContext);
 
 export const ButtonProvider = ({ children }) => {
-
   const [tissueFilter, setTissueFilter] = useState({
-    filter: "hue-rotate(70deg) "
+    // filter: "grayscale(70%) ",
   });
 
-  // função para atualizar o a cor da imagem
   const updateTissueFilter = () => {
+    const layer1 = document.getElementById("layer5uid");
+    gsap.to([layer1], {
+      // background: "rgba(255, 0, 0, 0.5)",
+      x:4,
+      duration: 0,
+    });
     setTissueFilter({
-      filter: "grayscale(80%)"
+      filter: "hue-rotate(70deg)"
     });
   };
-
+  
   //motion
   const controlsLayer1 = useAnimation();
   const startLayers = async () => {
     controlsLayer1.start({
       x: 100,
       transition: { duration: 1 },
-      
     });
   };
 
@@ -39,9 +42,8 @@ export const ButtonProvider = ({ children }) => {
     startLayers,
     tissueFilter,
     updateTissueFilter,
-    
   };
-  
+
   return (
     <ButtonContext.Provider value={ScrollState}>
       {children}

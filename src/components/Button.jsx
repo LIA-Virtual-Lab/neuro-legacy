@@ -42,7 +42,7 @@ export default function Button({ obj }) {
           updateTissueFilter();
           
         }}
-      >
+        >
         {obj.attributes.opcao}
       </button>
     </>

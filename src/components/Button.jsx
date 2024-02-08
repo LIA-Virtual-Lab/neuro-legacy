@@ -14,7 +14,7 @@ export default function Button({ obj }) {
     console.log("console button", stringCounter);
 
     if (obj.attributes.correta) {
-      console.log("acertou");
+      console.log(obj.attributes.correta);
       setBorderColor("border-green-500 border-2");
     } else {
       console.log("errou");

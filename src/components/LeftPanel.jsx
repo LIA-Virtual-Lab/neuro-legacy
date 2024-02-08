@@ -14,6 +14,16 @@ export default function LeftPanel() {
   const [quest, setQuest] = useState();
   const [answer, setAnswer] = useState();
 
+  function shuffleArray(array) {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
+  }
+  
+
   // chamada unica ao banco
   useEffect(() => {
     axios
@@ -22,9 +32,10 @@ export default function LeftPanel() {
       )
       .then((response) => {
         // console.log(response);
-        setData(response.data);
-        setQuest(response.data.data[0].attributes.questao);
-        setAnswer(response.data.data[0].attributes.respostas.data);
+        const shuffledData = shuffleArray(response.data.data);
+      setData(shuffledData);
+      setQuest(shuffledData[0].attributes.questao);
+      setAnswer(shuffledData[0].attributes.respostas.data);
         
       })
       .catch((error) => {
@@ -41,11 +52,11 @@ export default function LeftPanel() {
 
   function nextQuest() {
     if (!data) return;
-    if (data.data.length - 1 < indexQuest) return;
-    setQuest(data.data[index].attributes.questao);
-    setAnswer(data.data[index].attributes.respostas.data);
+    if (data.length - 1 < indexQuest) return;
+    setQuest(data[index].attributes.questao);
+    setAnswer(data[index].attributes.respostas.data);
   }
-  console.log(counter);
+  // console.log(counter);
 
   return (
     <motion.div

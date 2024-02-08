@@ -42,6 +42,7 @@ export default function Tissue() {
     setHoveredImage(null);
   };
   
+  //teste
   const individualTopValues = [-35, 144, 155, 163, -35, -30, -35, -30, -35, -35, -35, -35, -35, -35, -35, -35, -35, -30, -35, -30, -30, -30, -30, -30, -35];
   const indexValues = [3, 2, 1, 0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
 

@@ -8,11 +8,35 @@ import { useButtonContext } from "@/contexts/ButtonContext";
 
 export default function Tissue() {
   const { controlsTissue } = useAnimationContext();
-  const { tissueFilter } = useButtonContext();
+  const { tissueFilter, imgName } = useButtonContext();
 
-  const [hoveredImage, setHoveredImage] = useState(null);
-
-  const camadas = ["cornea", "granulosa", "espinhosa", "derme", "musculo_eretor", "camada6", "arteria", "veia", "adiposo", "camada9", "corpusculo_merkel", "corpusculo_ruffini", "raiz_pelo", "plexo_raiz_capilar", "plexo_raiz_capilar2", "corpusculo_pacini", "corpusculo_bulboso", "corpusculo_meissner", "terminacoes_nervosas", "bulbo_capilar", "vaso14", "vaso15", "vaso16", "vaso17", "glandula_sudoripara"];
+  const camadas = [
+    "cornea",
+    "granulosa",
+    "espinhosa",
+    "derme",
+    "musculo_eretor",
+    "camada6",
+    "arteria",
+    "veia",
+    "adiposo",
+    "camada9",
+    "corpusculo_merkel",
+    "Corpúsculo de Ruffini",
+    "raiz_pelo",
+    "plexo_raiz_capilar",
+    "plexo_raiz_capilar2",
+    "corpusculo_pacini",
+    "corpusculo_bulboso",
+    "corpusculo_meissner",
+    "terminacoes_nervosas",
+    "bulbo_capilar",
+    "vaso14",
+    "vaso15",
+    "vaso16",
+    "vaso17",
+    "glandula_sudoripara",
+  ];
   const [layers, setLayers] = useState([]);
 
   useEffect(() => {
@@ -33,18 +57,16 @@ export default function Tissue() {
       });
   }, []);
 
-  const handleMouseEnter = (id) => {
-    setHoveredImage(id);
-    console.log(id);
-  };
+ 
 
-  const handleMouseLeave = () => {
-    setHoveredImage(null);
-  };
-  
-  const individualTopValues = [-35, 144, 155, 163, -35, -30, -35, -30, -35, -35, -35, -35, -35, -35, -35, -35, -35, -30, -35, -30, -30, -30, -30, -30, -35];
-  const indexValues = [3, 2, 1, 0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-
+  const individualTopValues = [
+    -35, 144, 155, 163, -35, -35, -35, -30, -35, -35, -35, -35, -35, -35, -35,
+    -35, -35, -30, -35, -30, -30, -30, -30, -30, -35,
+  ];
+  const indexValues = [
+    3, 2, 1, 0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+    26, 27, 28, 29, 30,
+  ];
 
   return (
     <>
@@ -54,12 +76,10 @@ export default function Tissue() {
       >
         {layers.map((layer, index) => (
           <React.Fragment key={index}>
-            {layer.map((element) => ( 
+            {layer.map((element) => (
               <motion.div
                 key={element.id}
                 className={`camada-${element.id} `}
-                onMouseEnter={() => handleMouseEnter(element.id)}
-                onMouseLeave={handleMouseLeave}
                 style={{
                   position: "absolute",
                   top: individualTopValues[index], // Use individualTopValues array for custom top values
@@ -75,10 +95,6 @@ export default function Tissue() {
                   height={50}
                   alt={`camada-${element.id}`}
                   // style={tissueFilter}
-                  style={{
-                    ...(hoveredImage !== null && hoveredImage !== element.id && tissueFilter),
-                    transition: "filter 0.3s ease-in-out",
-                  }}
                 />
               </motion.div>
             ))}

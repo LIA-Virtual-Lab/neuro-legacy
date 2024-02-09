@@ -7,33 +7,12 @@ const ButtonContext = createContext();
 export const useButtonContext = () => useContext(ButtonContext);
 
 export const ButtonProvider = ({ children }) => {
-  const [tissueFilter, setTissueFilter] = useState({
-    // filter: "grayscale(70%) ",
-  });
-
-  const updateTissueFilter = () => {
-    const layer1 = document.getElementById("layer5uid");
-    gsap.to([layer1], {
-      // background: "rgba(255, 0, 0, 0.5)",
-      x:4,
-      duration: 0,
-      
-    });
-    setTissueFilter({
-      filter: "hue-rotate(70deg)"
-    });
-  };
-  
-  
+  const [imgName, setImgName] = useState();
 
   //gsap
   const ScrollState = {
-    playScroll: () => {
-      const layer1 = document.getElementById("layer1uid");
-      // gsap.to([layer1], { background: 'rgba(255, 0, 0, 0.5)', x:70, duration: 0 });
-    },
-    tissueFilter,
-    updateTissueFilter,
+    imgName,
+    setImgName,
   };
 
   return (

@@ -37,9 +37,9 @@ export const ButtonProvider = ({ children }) => {
   const [imgName, setImgName] = useState();
 
 
-  function testando {
+  function testando() {
 
-    console.log(imgName)
+    console.log("testeeee",imgName)
   }
 
   //gsap

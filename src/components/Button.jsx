@@ -74,6 +74,7 @@ export default function Button({ obj }) {
         } hover:scale-110 active:translate-x-10 duration-300 mt-5 shadow-xl`}
         onPointerDown={() => {
           stylesOnClick(obj.attributes.contra_resposta);
+          testando();
         }}
       >
         {obj.attributes.opcao}

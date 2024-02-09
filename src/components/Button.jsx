@@ -7,7 +7,7 @@ export default function Button({ obj }) {
   const { count, setCounter } = useContext(QuestContext);
   const [borderColor, setBorderColor] = useState("border");
   const [clicked, setClicked] = useState(false);
-  const { setImgName } = useButtonContext();
+  const { setImgName, testando } = useButtonContext();
 
   const stylesOnClick = (stringCounter) => {
     axios
@@ -34,7 +34,7 @@ export default function Button({ obj }) {
       // Agora você pode usar a constante opcaoEncontrada conforme necessário.
 
 
-        const imgName = opcaoEstaNoArray;
+        const imgName = opcaoEncontrada;
         setImgName(imgName);
         console.log("Tentando pegar img:", imgName);
       })
@@ -42,9 +42,12 @@ export default function Button({ obj }) {
         console.log(error);
       });
 
-    // setCounter(`${stringCounter}`); //contra-resposta
 
-    console.log("Console button", stringCounter);
+
+
+    setCounter(`${stringCounter}`); 
+
+    // console.log("Console button", stringCounter); //contra-resposta
 
     if (obj.attributes.correta) {
       console.log("Correto:", obj.attributes.opcao);

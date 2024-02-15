@@ -18,31 +18,32 @@ export default function LeftPanel() {
     const shuffledArray = [...array];
     for (let i = shuffledArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
     }
     return shuffledArray;
   }
-  
 
   // chamada unica ao banco
   useEffect(() => {
     axios
       .get(
-        "https://neurofisiologia-back-end-2a85b59bd567.herokuapp.com/api/perguntas?populate=*"
+        "https://neurofisiologia-back-end-2a85b59bd567.herokuapp.com/api/perguntas?populate[respostas][populate]=objeto"
       )
       .then((response) => {
         // console.log(response);
         const shuffledData = shuffleArray(response.data.data);
-      setData(shuffledData);
-      setQuest(shuffledData[0].attributes.questao);
-      setAnswer(shuffledData[0].attributes.respostas.data);
-        
+        setData(shuffledData);
+        setQuest(shuffledData[0].attributes.questao);
+        setAnswer(shuffledData[0].attributes.respostas.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
- 
+
   //atualizar os states
   useEffect(() => {
     // console.log("atualizei", indexQuest);

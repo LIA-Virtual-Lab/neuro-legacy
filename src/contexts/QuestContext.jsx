@@ -8,7 +8,7 @@ export function QuestProvider({ children }) {
 
   const count = () => {
     setIndexQuest((previous) => previous + 1);
-    console.log("valor index: ", indexQuest);
+    // console.log("valor index: ", indexQuest);
   };
 
 

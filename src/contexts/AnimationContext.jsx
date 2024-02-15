@@ -9,14 +9,21 @@ export const AnimationProvider = ({ children }) => {
 
   const [divVisivel, setDivVisivel] = useState(true);
 
+  const [imgs, setImgs] = useState([]);
+
+  function storageImgs(layers) {
+    layers.forEach((layer) => {
+      setImgs((prev) => [...prev, `layer_${layer[0].id}`]);
+    });
+  }
 
   const controlsLeft = useAnimation();
   const controlsRight = useAnimation();
   const controlsTissue = useAnimation();
-  
+
   const startAnimation = async () => {
     setAnimationActive(true);
-  
+
     controlsLeft.start({
       opacity: 0,
       scale: 2,
@@ -31,31 +38,27 @@ export const AnimationProvider = ({ children }) => {
       transition: { duration: 0.5 },
     });
 
-    
     // setDivVisivel(false);
   };
-  
-  
+
   async function swithAnimate() {
     await controlsTissue.start({
       opacity: 0,
       scale: 0.1,
       transition: { duration: 1 },
     });
-    
-    !divVisivel ? setDivVisivel(true) : null
+
+    !divVisivel ? setDivVisivel(true) : null;
   }
-  
-  
-  
+
   const value = {
     animationActive,
     controlsLeft,
     controlsRight,
     controlsTissue,
     startAnimation,
-
-
+    storageImgs,
+    imgs,
 
     swithAnimate,
     divVisivel,

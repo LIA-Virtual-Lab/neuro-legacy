@@ -1,59 +1,24 @@
-import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { QuestContext } from "@/contexts/QuestContext";
-import { useButtonContext } from "@/contexts/ButtonContext";
+import gsap from "gsap";
+import { useAnimationContext } from "@/contexts/AnimationContext";
 
 export default function Button({ obj }) {
   const { count, setCounter } = useContext(QuestContext);
   const [borderColor, setBorderColor] = useState("border");
   const [clicked, setClicked] = useState(false);
-  const { setImgName, testando } = useButtonContext();
+  const { imgs } = useAnimationContext();
 
-  const stylesOnClick = (stringCounter) => {
-    axios
-      .get(
-        "https://neurofisiologia-back-end-2a85b59bd567.herokuapp.com/api/respostas?populate=*"
-      )
-      .then((response) => {
-        const nomesDosObjetos = response.data.data.map(
-          (item) => item.attributes.objeto.data.attributes.nome
-        );
+  const stylesOnClick = (answerCounter) => {
+    setCounter(`${answerCounter}`);
+    // console.log("Console button", answerCounter);
 
-      // Verificar se obj.attributes.opcao está no array nomesDosObjetos
-      const opcaoEncontrada = nomesDosObjetos.includes(obj.attributes.opcao)
-        ? obj.attributes.opcao
-        : null;
-
-      if (opcaoEncontrada) {
-        console.log(`"${obj.attributes.opcao}" está no array nomesDosObjetos`);
-        console.log("Valor encontrado:", opcaoEncontrada);
-      } else {
-        console.log(`"${obj.attributes.opcao}" não está no array nomesDosObjetos`);
-      }
-
-      // Agora você pode usar a constante opcaoEncontrada conforme necessário.
-
-
-        const imgName = opcaoEncontrada;
-        setImgName(imgName);
-        console.log("Tentando pegar img:", imgName);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-
-
-
-    setCounter(`${stringCounter}`); 
-
-    // console.log("Console button", stringCounter); //contra-resposta
-
+    //estilos
     if (obj.attributes.correta) {
-      console.log("Correto:", obj.attributes.opcao);
+      // console.log("Correto:", obj.attributes.opcao);
       setBorderColor("border-green-500 border-2");
     } else {
-      console.log("Errou");
+      // console.log("Errou");
       setBorderColor("border-red-500 border-2");
     }
 
@@ -65,6 +30,29 @@ export default function Button({ obj }) {
     }, 1500);
   };
 
+
+  const checkImgResponse = (objId) => {
+    imgs.forEach((all_id) => {
+      const target = document.getElementById(all_id);
+
+      gsap.to(target, { alpha: 0.2,  scale: 1 });
+      // debugger;
+    });
+
+    const layer = document.getElementById(`layer_${objId}`);
+
+    gsap.to(layer, { alpha: 1,  scale: 2 });
+    // debugger;
+  };
+
+  const storageObj = (objto) => {
+    const objetosArray = Object.values(objto);
+
+    console.log(objetosArray);
+  };
+
+  storageObj(obj);
+
   return (
     <>
       <button
@@ -74,7 +62,8 @@ export default function Button({ obj }) {
         } hover:scale-110 active:translate-x-10 duration-300 mt-5 shadow-xl`}
         onPointerDown={() => {
           stylesOnClick(obj.attributes.contra_resposta);
-          testando();
+          checkImgResponse(obj.attributes.objeto.data.id);
+          
         }}
       >
         {obj.attributes.opcao}

@@ -35,35 +35,35 @@ export default function Button({ obj }) {
     imgs.forEach((all_id) => {
       const target = document.getElementById(all_id);
 
-      gsap.to(target, { alpha: 0.2,  scale: 1 });
+      gsap.to(target, { alpha: 0.2, scale: 1 });
       // debugger;
+
+      setTimeout(() => {
+        gsap.to(target, { alpha: 1 })
+      }, 1500);
+
     });
 
     const layer = document.getElementById(`layer_${objId}`);
 
-    gsap.to(layer, { alpha: 1,  scale: 2 });
+    gsap.to(layer, { alpha: 1, scale: 1.3, background: "rgba(115,200, 115, 0.5)" });
     // debugger;
+
+    setTimeout(() => {
+      gsap.to(layer, { scale: 1, background: "rgba(255, 0, 0, 0)" })
+    }, 1500);
   };
-
-  const storageObj = (objto) => {
-    const objetosArray = Object.values(objto);
-
-    console.log(objetosArray);
-  };
-
-  storageObj(obj);
 
   return (
     <>
       <button
         id={obj.attributes.opcao}
-        className={`p-2 rounded ${borderColor} border-solid ${
-          clicked ? "" : "hover:border-black"
-        } hover:scale-110 active:translate-x-10 duration-300 mt-5 shadow-xl`}
+        className={`p-2 rounded ${borderColor} border-solid ${clicked ? "" : "hover:border-black"
+          } hover:scale-110 active:translate-x-10 duration-300 mt-5 shadow-xl`}
         onPointerDown={() => {
           stylesOnClick(obj.attributes.contra_resposta);
           checkImgResponse(obj.attributes.objeto.data.id);
-          
+
         }}
       >
         {obj.attributes.opcao}
